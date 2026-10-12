@@ -9,6 +9,7 @@ import BreathingPage from './pages/BreathingPage'
 import ContactPage from './pages/ContactPage'
 import AdminPage from './pages/AdminPage'
 import { INITIAL_PROJECTS } from './data/defaultProjects'
+import { DEFAULT_SITE_CONTENT } from './data/defaultContent'
 import { soundEngine } from './audio'
 import './App.css'
 
@@ -27,6 +28,16 @@ export default function App() {
     }
   })
 
+  // Persistent site editable content in localStorage
+  const [siteContent, setSiteContent] = useState(() => {
+    try {
+      const saved = localStorage.getItem('doomhex_site_content')
+      return saved ? JSON.parse(saved) : DEFAULT_SITE_CONTENT
+    } catch (e) {
+      return DEFAULT_SITE_CONTENT
+    }
+  })
+
   // Fullscreen Katana Slash state
   const [slashActive, setSlashActive] = useState(false)
   const [slashTechnique, setSlashTechnique] = useState('')
@@ -36,6 +47,12 @@ export default function App() {
       localStorage.setItem('doomhex_quests_db', JSON.stringify(projects))
     } catch (e) {}
   }, [projects])
+
+  useEffect(() => {
+    try {
+      localStorage.setItem('doomhex_site_content', JSON.stringify(siteContent))
+    } catch (e) {}
+  }, [siteContent])
 
   // Update theme data-breathing on root
   useEffect(() => {
@@ -51,7 +68,7 @@ export default function App() {
     }, 1600)
   }
 
-  // Handle URL Hash navigation if present (#about, #projects, etc.)
+  // Handle URL Hash navigation
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '')
@@ -67,18 +84,20 @@ export default function App() {
   const renderCurrentPage = () => {
     switch (activePage) {
       case 'about':
-        return <AboutPage onSlash={triggerSlash} />
+        return <AboutPage onSlash={triggerSlash} content={siteContent.about} />
       case 'projects':
         return <ProjectsPage projects={projects} setActivePage={setActivePage} />
       case 'breathing':
         return <BreathingPage onSlash={triggerSlash} setBreathing={setBreathing} />
       case 'contact':
-        return <ContactPage />
+        return <ContactPage content={siteContent.contact} />
       case 'admin':
         return (
           <AdminPage
             projects={projects}
             setProjects={setProjects}
+            siteContent={siteContent}
+            setSiteContent={setSiteContent}
             onSlash={triggerSlash}
           />
         )
@@ -90,6 +109,7 @@ export default function App() {
             breathing={breathing}
             onSlash={triggerSlash}
             projects={projects}
+            content={siteContent.home}
           />
         )
     }
@@ -130,10 +150,10 @@ export default function App() {
             <div className="footer-kanji-seal">DH</div>
             <div>
               <div className="footer-credits">
-                <strong>DoomHex</strong> | Frontend & Fullstack Developer (Demon Slayer Neon Theme)
+                <strong>{siteContent.footer?.brandText || 'DoomHex | Frontend & Fullstack Developer'}</strong>
               </div>
               <div className="footer-sub-note">
-                Все права защищены. Разработано на React 19 + Vite с интерактивными неоновыми анимациями.
+                {siteContent.footer?.subText || 'Все права защищены. Разработано на React 19 + Vite.'}
               </div>
             </div>
           </div>

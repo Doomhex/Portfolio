@@ -16,7 +16,8 @@ export default function HomePage({
   setActivePage,
   breathing,
   onSlash,
-  projects
+  projects,
+  content = {}
 }) {
   const handleTestSlash = () => {
     soundEngine.playSlash()
@@ -27,7 +28,7 @@ export default function HomePage({
 
   return (
     <div className="page-container home-page">
-      {/* Hero Banner with Anime Art & Modern Copy */}
+      {/* Hero Banner with Anime Art & Dynamic Copy */}
       <div className="hero-banner-frame">
         <div 
           className="hero-art-bg"
@@ -40,23 +41,22 @@ export default function HomePage({
           <div className="hashira-badge-row">
             <span className="hashira-badge">
               <span className="pulse-dot green" />
-              <span>ОТКРЫТ К НОВЫМ ПРОЕКТАМ</span>
+              <span>{content.badgeText || 'ОТКРЫТ К НОВЫМ ПРОЕКТАМ'}</span>
             </span>
             <span className="breathing-live-tag">
               <Sparkles size={14} />
-              <span>НЕОНОВЫЙ АНИМЕ СТИЛЬ</span>
+              <span>{content.tagText || 'НЕОНОВЫЙ АНИМЕ СТИЛЬ'}</span>
             </span>
           </div>
 
           <h1 className="hero-main-title">
-            <span className="kanji-subtitle-sub">FRONTEND & FULLSTACK</span>
+            <span className="kanji-subtitle-sub">{content.preTitle || 'FRONTEND & FULLSTACK'}</span>
             <br />
-            DOOMHEX
+            {content.mainTitle || 'DOOMHEX'}
           </h1>
 
           <p className="hero-epic-quote">
-            Создаю современные, быстрые и масштабируемые веб-приложения с продуманным интерфейсом, 
-            чистой архитектурой и вниманием к мельчайшим деталям.
+            {content.description || 'Создаю современные, быстрые и масштабируемые веб-приложения с продуманным интерфейсом, чистой архитектурой и вниманием к мельчайшим деталям.'}
           </p>
 
           {/* Action Buttons */}
@@ -69,7 +69,7 @@ export default function HomePage({
               className="btn-demon-katana"
             >
               <Layers size={18} />
-              <span>Смотреть проекты ({projects.length})</span>
+              <span>{content.projectsBtnText || 'Смотреть проекты'} ({projects.length})</span>
             </button>
 
             <button
@@ -79,7 +79,7 @@ export default function HomePage({
               }}
               className="btn-neon-ghost"
             >
-              <span>Связаться со мной</span>
+              <span>{content.contactBtnText || 'Связаться со мной'}</span>
               <ArrowRight size={16} />
             </button>
 
@@ -90,7 +90,7 @@ export default function HomePage({
               title="Запустить анимацию удара клинка"
             >
               <Swords size={17} />
-              <span>Эффект клинка</span>
+              <span>{content.bladeBtnText || 'Эффект клинка'}</span>
             </button>
           </div>
         </div>
@@ -106,9 +106,9 @@ export default function HomePage({
               </div>
               <span className="stat-kanji">4+</span>
             </div>
-            <div className="stat-number">4+ Года</div>
-            <div className="stat-label">Практического Опыта</div>
-            <div className="stat-sub">React, TypeScript, экосистема современных веб-сервисов</div>
+            <div className="stat-number">{content.stat1Value || '4+ Года'}</div>
+            <div className="stat-label">{content.stat1Title || 'Практического Опыта'}</div>
+            <div className="stat-sub">{content.stat1Desc || 'React, TypeScript, экосистема современных веб-сервисов'}</div>
           </div>
 
           <div className="stat-card glass-panel">
@@ -118,9 +118,9 @@ export default function HomePage({
               </div>
               <span className="stat-kanji">100%</span>
             </div>
-            <div className="stat-number">99.9% Uptime</div>
-            <div className="stat-label">Чистая Архитектура</div>
-            <div className="stat-sub">Отказоустойчивость, чистый код и покрытие тестами</div>
+            <div className="stat-number">{content.stat2Value || '99.9% Uptime'}</div>
+            <div className="stat-label">{content.stat2Title || 'Чистая Архитектура'}</div>
+            <div className="stat-sub">{content.stat2Desc || 'Отказоустойчивость, чистый код и покрытие тестами'}</div>
           </div>
 
           <div className="stat-card glass-panel">
@@ -130,9 +130,9 @@ export default function HomePage({
               </div>
               <span className="stat-kanji">&lt;</span>
             </div>
-            <div className="stat-number">&lt; 100ms</div>
-            <div className="stat-label">Оптимизация Скорости</div>
-            <div className="stat-sub">Мгновенный отклик интерфейса и быстрая загрузка</div>
+            <div className="stat-number">{content.stat3Value || '< 100ms'}</div>
+            <div className="stat-label">{content.stat3Title || 'Оптимизация Скорости'}</div>
+            <div className="stat-sub">{content.stat3Desc || 'Мгновенный отклик интерфейса и быстрая загрузка'}</div>
           </div>
         </div>
       </section>
@@ -141,9 +141,9 @@ export default function HomePage({
       <section className="home-featured-section">
         <div className="section-title-wrap">
           <div className="section-kanji-tag">ПОРТФОЛИО</div>
-          <h2 className="neon-section-heading">Избранные Проекты</h2>
+          <h2 className="neon-section-heading">{content.featuredHeading || 'Избранные Проекты'}</h2>
           <p className="section-description">
-            Ключевые веб-приложения и программные решения разработчика DoomHex
+            {content.featuredSub || 'Ключевые веб-приложения и программные решения разработчика DoomHex'}
           </p>
         </div>
 

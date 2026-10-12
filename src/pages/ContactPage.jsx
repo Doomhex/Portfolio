@@ -5,17 +5,21 @@ import {
   Mail,
   Copy,
   Check,
-  MessageSquare,
   Sparkles,
   ShieldCheck
 } from 'lucide-react'
 import GithubIcon from '../components/GithubIcon'
 import { soundEngine } from '../audio'
 
-export default function ContactPage() {
+export default function ContactPage({ content = {} }) {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [dispatched, setDispatched] = useState(false)
   const [copiedKey, setCopiedKey] = useState('')
+
+  const emailValue = content.email || 'doomhex@slayer.dev'
+  const tgValue = content.telegram || '@DoomHex'
+  const discordValue = content.discord || 'doomhex#1337'
+  const githubValue = content.github || 'github.com/Doomhex'
 
   const handleCopy = (key, text) => {
     navigator.clipboard.writeText(text)
@@ -48,9 +52,9 @@ export default function ContactPage() {
     <div className="page-container contact-page">
       <div className="section-title-wrap">
         <div className="section-kanji-tag">СВЯЗЬ И СОТРУДНИЧЕСТВО</div>
-        <h1 className="neon-section-heading">Контакты & Обратная Связь</h1>
+        <h1 className="neon-section-heading">{content.heading || 'Контакты & Обратная Связь'}</h1>
         <p className="section-description">
-          Обсудить проект, предложить задачу или задать вопрос. Напишите сообщение через форму или напрямую в мессенджеры.
+          {content.subheading || 'Обсудить проект, предложить задачу или задать вопрос. Напишите сообщение через форму или напрямую в мессенджеры.'}
         </p>
       </div>
 
@@ -62,8 +66,8 @@ export default function ContactPage() {
               <Mail size={22} />
             </div>
             <div>
-              <h2 className="crow-card-title">Отправить сообщение</h2>
-              <p className="crow-card-sub">Заполните форму, и я отвечу вам в ближайшее время</p>
+              <h2 className="crow-card-title">{content.formTitle || 'Отправить сообщение'}</h2>
+              <p className="crow-card-sub">{content.formSub || 'Заполните форму, и я отвечу вам в ближайшее время'}</p>
             </div>
           </div>
 
@@ -129,10 +133,10 @@ export default function ContactPage() {
             <div className="channel-box">
               <div className="ch-info">
                 <span className="ch-label">Email:</span>
-                <span className="ch-val">doomhex@slayer.dev</span>
+                <span className="ch-val">{emailValue}</span>
               </div>
               <button
-                onClick={() => handleCopy('email', 'doomhex@slayer.dev')}
+                onClick={() => handleCopy('email', emailValue)}
                 className="ch-copy-btn"
               >
                 {copiedKey === 'email' ? <Check size={16} /> : <Copy size={16} />}
@@ -143,10 +147,10 @@ export default function ContactPage() {
             <div className="channel-box">
               <div className="ch-info">
                 <span className="ch-label">GitHub Профиль:</span>
-                <span className="ch-val">github.com/Doomhex</span>
+                <span className="ch-val">{githubValue}</span>
               </div>
               <a
-                href="https://github.com/Doomhex"
+                href={githubValue.startsWith('http') ? githubValue : `https://${githubValue}`}
                 target="_blank"
                 rel="noreferrer"
                 className="ch-link-btn"
@@ -160,10 +164,10 @@ export default function ContactPage() {
             <div className="channel-box">
               <div className="ch-info">
                 <span className="ch-label">Telegram:</span>
-                <span className="ch-val">@DoomHex</span>
+                <span className="ch-val">{tgValue}</span>
               </div>
               <button
-                onClick={() => handleCopy('tg', '@DoomHex')}
+                onClick={() => handleCopy('tg', tgValue)}
                 className="ch-copy-btn"
               >
                 {copiedKey === 'tg' ? <Check size={16} /> : <Copy size={16} />}
@@ -174,10 +178,10 @@ export default function ContactPage() {
             <div className="channel-box">
               <div className="ch-info">
                 <span className="ch-label">Discord:</span>
-                <span className="ch-val">doomhex#1337</span>
+                <span className="ch-val">{discordValue}</span>
               </div>
               <button
-                onClick={() => handleCopy('discord', 'doomhex#1337')}
+                onClick={() => handleCopy('discord', discordValue)}
                 className="ch-copy-btn"
               >
                 {copiedKey === 'discord' ? <Check size={16} /> : <Copy size={16} />}
@@ -189,7 +193,7 @@ export default function ContactPage() {
           <div className="sanctum-stamp-box">
             <Sparkles size={24} style={{ color: 'var(--neon-primary)', flexShrink: 0 }} />
             <p className="sanctum-stamp-text">
-              Открыт для интересных проектов, разработки новых интерфейсов и предложений о сотрудничестве.
+              {content.directNotice || 'Открыт для интересных проектов, разработки новых интерфейсов и предложений о сотрудничестве.'}
             </p>
           </div>
         </div>

@@ -12,7 +12,7 @@ import {
 } from 'lucide-react'
 import { soundEngine } from '../audio'
 
-export default function AboutPage({ onSlash }) {
+export default function AboutPage({ onSlash, content = {} }) {
   const skillsList = [
     { name: 'React 19 & Next.js', level: '98%', rank: 'Продвинутый уровень', desc: 'Хуки, управление состоянием, SSR/SSG, оптимизация', icon: <Code size={18} /> },
     { name: 'TypeScript & JavaScript', level: '95%', rank: 'Строгая типизация', desc: 'Чистый код, интерфейсы, масштабируемые типы данных', icon: <Cpu size={18} /> },
@@ -50,35 +50,34 @@ export default function AboutPage({ onSlash }) {
 
         <div className="about-bio-col">
           <div className="badge-row">
-            <span className="slayer-corp-tag">FULLSTACK DEVELOPER</span>
-            <span className="hashira-title-tag">REACT & TYPESCRIPT</span>
+            <span className="slayer-corp-tag">{content.badge1 || 'FULLSTACK DEVELOPER'}</span>
+            <span className="hashira-title-tag">{content.badge2 || 'REACT & TYPESCRIPT'}</span>
           </div>
 
           <h1 className="about-name">
-            DoomHex
+            {content.name || 'DoomHex'}
           </h1>
 
           <p className="about-lead">
-            Привет! Я разработчик интерфейсов и веб-приложений. Создаю быстрые, отзывчивые 
-            и визуально выразительные цифровые продукты с акцентом на надежность, чистую компонентную архитектуру и отличный пользовательский опыт.
+            {content.bio || 'Привет! Я разработчик интерфейсов и веб-приложений. Создаю быстрые, отзывчивые и визуально выразительные цифровые продукты с акцентом на надежность, чистую компонентную архитектуру и отличный пользовательский опыт.'}
           </p>
 
           <div className="slayer-specs-grid">
             <div className="spec-item">
-              <span className="spec-label">Специализация:</span>
-              <span className="spec-val">Frontend & Fullstack Web Development</span>
+              <span className="spec-label">{content.spec1Label || 'Специализация:'}</span>
+              <span className="spec-val">{content.spec1Val || 'Frontend & Fullstack Web Development'}</span>
             </div>
             <div className="spec-item">
-              <span className="spec-label">Основной стек:</span>
-              <span className="spec-val">React 19, TypeScript, Vite, Node.js</span>
+              <span className="spec-label">{content.spec2Label || 'Основной стек:'}</span>
+              <span className="spec-val">{content.spec2Val || 'React 19, TypeScript, Vite, Node.js'}</span>
             </div>
             <div className="spec-item">
-              <span className="spec-label">Подход:</span>
-              <span className="spec-val">Clean Architecture, Component-Driven</span>
+              <span className="spec-label">{content.spec3Label || 'Подход:'}</span>
+              <span className="spec-val">{content.spec3Val || 'Clean Architecture, Component-Driven'}</span>
             </div>
             <div className="spec-item">
-              <span className="spec-label">Деплой & Хостинг:</span>
-              <span className="spec-val">GitHub, Vercel, Cloud Services</span>
+              <span className="spec-label">{content.spec4Label || 'Деплой & Хостинг:'}</span>
+              <span className="spec-val">{content.spec4Val || 'GitHub, Vercel, Cloud Services'}</span>
             </div>
           </div>
         </div>
@@ -88,9 +87,9 @@ export default function AboutPage({ onSlash }) {
       <section className="about-skills-section">
         <div className="section-title-wrap">
           <div className="section-kanji-tag">СТЕК И НАВЫКИ</div>
-          <h2 className="neon-section-heading">Технологии & Компетенции</h2>
+          <h2 className="neon-section-heading">{content.skillsHeading || 'Технологии & Компетенции'}</h2>
           <p className="section-description">
-            Инструменты и технологии, которые я использую для реализации клиентских и серверных задач
+            {content.skillsSub || 'Инструменты и технологии, которые я использую для реализации клиентских и серверных задач'}
           </p>
         </div>
 
@@ -133,10 +132,9 @@ export default function AboutPage({ onSlash }) {
           <ShieldCheck size={48} style={{ color: 'var(--neon-primary)' }} />
         </div>
         <div className="oath-right">
-          <h3 className="oath-heading">Принципы разработки DoomHex</h3>
+          <h3 className="oath-heading">{content.principlesHeading || 'Принципы разработки DoomHex'}</h3>
           <p className="oath-text">
-            Писать поддерживаемый и понятный код, тестировать интерфейсы на реальных устройствах, 
-            не допускать замедления страниц и всегда доводить проект до идеального состояния перед релизом.
+            {content.principlesText || 'Писать поддерживаемый и понятный код, тестировать интерфейсы на реальных устройствах, не допускать замедления страниц и всегда доводить проект до идеального состояния перед релизом.'}
           </p>
         </div>
       </section>
