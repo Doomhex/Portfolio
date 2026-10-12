@@ -1,32 +1,31 @@
 import React from 'react'
 import {
-  Shield,
+  ShieldCheck,
   Award,
   Zap,
   Code,
-  Flame,
-  Droplets,
   Layers,
   Cpu,
   Compass,
-  CheckCircle2
+  CheckCircle2,
+  Sparkles
 } from 'lucide-react'
 import { soundEngine } from '../audio'
 
 export default function AboutPage({ onSlash }) {
   const skillsList = [
-    { name: 'React 19 & Next.js Ecosystem', level: '98%', rank: 'Мастер формы', icon: <Code size={18} /> },
-    { name: 'TypeScript & Чистая Архитектура', level: '95%', rank: 'Абсолютный контроль', icon: <Cpu size={18} /> },
-    { name: 'Неоновый UI/UX & Микро-анимации', level: '97%', rank: 'Визуальный транс', icon: <Layers size={18} /> },
-    { name: 'State Management & Performance', level: '94%', rank: 'Мгновенный отклик', icon: <Zap size={18} /> },
-    { name: 'Node.js, Express & REST APIs', level: '91%', rank: 'Глубинная связь', icon: <Compass size={18} /> },
-    { name: 'CI/CD & Деплой (Vercel, Git)', level: '99%', rank: 'Непрерывный поток', icon: <Award size={18} /> }
+    { name: 'React 19 & Next.js', level: '98%', rank: 'Продвинутый уровень', desc: 'Хуки, управление состоянием, SSR/SSG, оптимизация', icon: <Code size={18} /> },
+    { name: 'TypeScript & JavaScript', level: '95%', rank: 'Строгая типизация', desc: 'Чистый код, интерфейсы, масштабируемые типы данных', icon: <Cpu size={18} /> },
+    { name: 'Современный UI/UX & CSS', level: '97%', rank: 'Pixel Perfect', desc: 'Адаптивная верстка, микро-анимации, дизайн-системы', icon: <Layers size={18} /> },
+    { name: 'Производительность & Web Vitals', level: '94%', rank: 'Высокая скорость', desc: 'Оптимизация рендеринга, Lazy loading, бандлинг Vite', icon: <Zap size={18} /> },
+    { name: 'Node.js, Express & REST APIs', level: '91%', rank: 'Fullstack интеграции', desc: 'Асинхронные сервисы, работа с БД, интеграция API', icon: <Compass size={18} /> },
+    { name: 'Git, GitHub & Vercel CI/CD', level: '99%', rank: 'Автоматизация', desc: 'Контроль версий, командная работа, непрерывный деплой', icon: <Award size={18} /> }
   ]
 
-  const handleInspectBlade = () => {
+  const handleSoundTest = () => {
     soundEngine.playSlash()
     if (onSlash) {
-      onSlash('НИТИРИН DOOMHEX: СТАЛЬ ТАМАХАГАНЭ')
+      onSlash('DOOMHEX DEV PROFILE ⚡')
     }
   }
 
@@ -38,61 +37,60 @@ export default function AboutPage({ onSlash }) {
           <div className="avatar-frame-glow">
             <img
               src="/images/avatar.jpg"
-              alt="DoomHex Slayer Avatar"
+              alt="DoomHex Avatar"
               className="doomhex-avatar-img"
             />
-            <div className="avatar-kanji-badge">柱</div>
+            <div className="avatar-kanji-badge">DEV</div>
           </div>
-          <button onClick={handleInspectBlade} className="blade-inspect-btn">
-            <span>Осмотреть Клинок</span>
-            <span className="spark-dot" />
+          <button onClick={handleSoundTest} className="blade-inspect-btn">
+            <Sparkles size={15} />
+            <span>Интерактивный тест</span>
           </button>
         </div>
 
         <div className="about-bio-col">
-          <div className="rank-watermark">鬼殺隊</div>
           <div className="badge-row">
-            <span className="slayer-corp-tag">КОРПУС ИСТРЕБИТЕЛЕЙ (DEMON SLAYER CORPS)</span>
-            <span className="hashira-title-tag">СТОЛП ЦИФРОВОГО ДЫХАНИЯ</span>
+            <span className="slayer-corp-tag">FULLSTACK DEVELOPER</span>
+            <span className="hashira-title-tag">REACT & TYPESCRIPT</span>
           </div>
 
           <h1 className="about-name">
-            DoomHex <span className="japanese-kanji-name">・ドゥームヘックス</span>
+            DoomHex
           </h1>
 
           <p className="about-lead">
-            Веб-разработчик и создатель цифровых миров, вдохновленных эстетикой клинков и кибернетического неона. 
-            Каждая строчка кода выверяется с той же точностью, с которой куется легендарная катана Нитирин в деревне кузнецов.
+            Привет! Я разработчик интерфейсов и веб-приложений. Создаю быстрые, отзывчивые 
+            и визуально выразительные цифровые продукты с акцентом на надежность, чистую компонентную архитектуру и отличный пользовательский опыт.
           </p>
 
           <div className="slayer-specs-grid">
             <div className="spec-item">
-              <span className="spec-label">Клинок Нитирин:</span>
-              <span className="spec-val">Пурпурно-черный (Электричество & Огонь)</span>
+              <span className="spec-label">Специализация:</span>
+              <span className="spec-val">Frontend & Fullstack Web Development</span>
             </div>
             <div className="spec-item">
-              <span className="spec-label">Основной стиль:</span>
-              <span className="spec-val">Дыхание Чистой Архитектуры</span>
+              <span className="spec-label">Основной стек:</span>
+              <span className="spec-val">React 19, TypeScript, Vite, Node.js</span>
             </div>
             <div className="spec-item">
-              <span className="spec-label">Стаж в Корпусе:</span>
-              <span className="spec-val">Более 4 лет упорных тренировок</span>
+              <span className="spec-label">Подход:</span>
+              <span className="spec-val">Clean Architecture, Component-Driven</span>
             </div>
             <div className="spec-item">
-              <span className="spec-label">Кредо:</span>
-              <span className="spec-val">«Ни единой ошибки в продакшене»</span>
+              <span className="spec-label">Деплой & Хостинг:</span>
+              <span className="spec-val">GitHub, Vercel, Cloud Services</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Skills & Mastery Matrix */}
+      {/* Skills Matrix */}
       <section className="about-skills-section">
         <div className="section-title-wrap">
-          <div className="section-kanji-tag">技量</div>
-          <h2 className="neon-section-heading">Мастерство Техник & Стек</h2>
+          <div className="section-kanji-tag">СТЕК И НАВЫКИ</div>
+          <h2 className="neon-section-heading">Технологии & Компетенции</h2>
           <p className="section-description">
-            Уровень владения языками программирования, фреймворками и инструментами разработки
+            Инструменты и технологии, которые я использую для реализации клиентских и серверных задач
           </p>
         </div>
 
@@ -102,7 +100,10 @@ export default function AboutPage({ onSlash }) {
               <div className="skill-meter-header">
                 <div className="skill-icon-name">
                   <div className="skill-icon-round">{skill.icon}</div>
-                  <span className="skill-title">{skill.name}</span>
+                  <div>
+                    <span className="skill-title">{skill.name}</span>
+                    <div style={{ fontSize: '0.78rem', color: '#94a3b8' }}>{skill.desc}</div>
+                  </div>
                 </div>
                 <span className="skill-pct-badge">{skill.level}</span>
               </div>
@@ -118,7 +119,7 @@ export default function AboutPage({ onSlash }) {
                 <span className="skill-rank-title">{skill.rank}</span>
                 <span className="skill-verified">
                   <CheckCircle2 size={13} />
-                  <span>Проверено в боях</span>
+                  <span>Проверено на проектах</span>
                 </span>
               </div>
             </div>
@@ -126,16 +127,16 @@ export default function AboutPage({ onSlash }) {
         </div>
       </section>
 
-      {/* Hashira Oath / Rules */}
+      {/* Principles Card */}
       <section className="hashira-oath-card glass-panel">
         <div className="oath-left">
-          <div className="oath-kanji-large">不撓不屈</div>
+          <ShieldCheck size={48} style={{ color: 'var(--neon-primary)' }} />
         </div>
         <div className="oath-right">
-          <h3 className="oath-heading">Клятва Столпа DoomHex</h3>
+          <h3 className="oath-heading">Принципы разработки DoomHex</h3>
           <p className="oath-text">
-            «Никогда не сдаваться перед трудностями архитектуры. Защищать пользователей от медленных загрузок, 
-            нестабильных скриптов и визуального хаоса. Стремиться к абсолютной красоте интерфейса».
+            Писать поддерживаемый и понятный код, тестировать интерфейсы на реальных устройствах, 
+            не допускать замедления страниц и всегда доводить проект до идеального состояния перед релизом.
           </p>
         </div>
       </section>

@@ -7,8 +7,9 @@ import {
   Volume2,
   VolumeX,
   Lock,
-  Swords,
-  Scroll,
+  Layers,
+  User,
+  Home,
   Send,
   Sparkles,
   Menu,
@@ -35,12 +36,12 @@ export default function Navbar({
   ]
 
   const navItems = [
-    { id: 'home', label: 'Святилище', icon: <Swords size={16} /> },
-    { id: 'about', label: 'О Столпе', icon: <Scroll size={16} /> },
-    { id: 'projects', label: 'Квесты & Код', icon: <Sparkles size={16} /> },
-    { id: 'breathing', label: 'Зал Техник', icon: <Flame size={16} /> },
-    { id: 'contact', label: 'Ворон Уз', icon: <Send size={16} /> },
-    { id: 'admin', label: 'Врата Админа', icon: <Lock size={16} /> }
+    { id: 'home', label: 'Главная', icon: <Home size={16} /> },
+    { id: 'about', label: 'Обо мне', icon: <User size={16} /> },
+    { id: 'projects', label: 'Проекты', icon: <Layers size={16} /> },
+    { id: 'breathing', label: 'Эффекты & FX', icon: <Sparkles size={16} /> },
+    { id: 'contact', label: 'Контакты', icon: <Send size={16} /> },
+    { id: 'admin', label: 'Админка', icon: <Lock size={16} /> }
   ]
 
   const handleBreathingChange = (styleId) => {
@@ -51,7 +52,7 @@ export default function Navbar({
     else soundEngine.playSlash()
 
     if (onSlash) {
-      onSlash(`Стиль: ${styleId.toUpperCase()}`)
+      onSlash(`Тема: ${styleId.toUpperCase()}`)
     }
   }
 
@@ -75,10 +76,10 @@ export default function Navbar({
           className="navbar-brand-group" 
           onClick={() => handleNavClick('home')}
         >
-          <div className="kanji-crest">滅</div>
+          <div className="kanji-crest">DH</div>
           <div className="brand-text-block">
             <span className="brand-name">DoomHex</span>
-            <span className="brand-sub">КИБЕР-СТОЛП ПОЛНОГО ДЫХАНИЯ</span>
+            <span className="brand-sub">FRONTEND & FULLSTACK DEVELOPER</span>
           </div>
         </div>
 
@@ -99,14 +100,14 @@ export default function Navbar({
 
         {/* Right Controls: Breathing Selector & Audio */}
         <div className="navbar-actions-group">
-          {/* Breathing Pills */}
-          <div className="breathing-selector-pill">
+          {/* Breathing Theme Switcher */}
+          <div className="breathing-selector-pill" title="Сменить неоновую тему (Demon Slayer Style)">
             {breathingModes.map((b) => (
               <button
                 key={b.id}
                 onClick={() => handleBreathingChange(b.id)}
                 className={`breathing-icon-btn ${breathing === b.id ? 'active' : ''}`}
-                title={`Сменить дыхание: ${b.label}`}
+                title={`Сменить тему: ${b.label}`}
                 style={{
                   '--accent': b.color
                 }}
@@ -120,7 +121,7 @@ export default function Navbar({
           <button
             onClick={handleAudioToggle}
             className={`sound-toggle-btn ${isMuted ? 'muted' : ''}`}
-            title={isMuted ? 'Включить звук катаны' : 'Выключить звук'}
+            title={isMuted ? 'Включить интерактивные звуки' : 'Выключить звук'}
           >
             {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
           </button>

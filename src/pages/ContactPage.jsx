@@ -7,14 +7,13 @@ import {
   Check,
   MessageSquare,
   Sparkles,
-  ShieldCheck,
-  Feather
+  ShieldCheck
 } from 'lucide-react'
 import GithubIcon from '../components/GithubIcon'
 import { soundEngine } from '../audio'
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ sender: '', email: '', message: '' })
+  const [formData, setFormData] = useState({ name: '', email: '', message: '' })
   const [dispatched, setDispatched] = useState(false)
   const [copiedKey, setCopiedKey] = useState('')
 
@@ -29,60 +28,60 @@ export default function ContactPage() {
     e.preventDefault()
     if (!formData.email || !formData.message) return
 
-    soundEngine.playSlash()
+    soundEngine.playClick()
     setDispatched(true)
 
     confetti({
-      particleCount: 80,
-      spread: 80,
+      particleCount: 70,
+      spread: 75,
       origin: { y: 0.6 },
       colors: ['#c084fc', '#38bdf8', '#facc15', '#ffffff']
     })
 
     setTimeout(() => {
-      setFormData({ sender: '', email: '', message: '' })
+      setFormData({ name: '', email: '', message: '' })
       setDispatched(false)
-    }, 4500)
+    }, 4000)
   }
 
   return (
     <div className="page-container contact-page">
       <div className="section-title-wrap">
-        <div className="section-kanji-tag">鎹鴉・伝令</div>
-        <h1 className="neon-section-heading">Ворон Уз: Связь со Столпом</h1>
+        <div className="section-kanji-tag">СВЯЗЬ И СОТРУДНИЧЕСТВО</div>
+        <h1 className="neon-section-heading">Контакты & Обратная Связь</h1>
         <p className="section-description">
-          Отправьте срочное послание через Ворона уз (Kasugai Crow) или свяжитесь с DoomHex в защищенных каналах связи.
+          Обсудить проект, предложить задачу или задать вопрос. Напишите сообщение через форму или напрямую в мессенджеры.
         </p>
       </div>
 
       <div className="contact-crow-layout">
-        {/* Left Scroll Form */}
+        {/* Contact Form */}
         <div className="crow-form-card glass-panel">
           <div className="crow-scroll-header">
             <div className="scroll-icon-wrap">
-              <Feather size={22} />
+              <Mail size={22} />
             </div>
             <div>
-              <h2 className="crow-card-title">Свиток Поручения</h2>
-              <p className="crow-card-sub">Напишите о проекте, предложении или коллаборации</p>
+              <h2 className="crow-card-title">Отправить сообщение</h2>
+              <p className="crow-card-sub">Заполните форму, и я отвечу вам в ближайшее время</p>
             </div>
           </div>
 
           {dispatched ? (
             <div className="crow-sent-state">
-              <div className="crow-stamp-kanji">受領</div>
-              <h3>Послание отправлено Вороном!</h3>
-              <p>Ворон уже вылетел в поместье Столпа DoomHex. Ответ прибудет со скоростью звука!</p>
+              <Check size={48} style={{ color: '#34d399', margin: '0 auto 12px auto' }} />
+              <h3>Сообщение успешно отправлено!</h3>
+              <p>Спасибо за обращение. Я свяжусь с вами по указанному адресу электронной почты.</p>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="crow-messenger-form">
               <div className="form-field">
-                <label>Ваше Имя / Позывной в Корпусе</label>
+                <label>Ваше имя</label>
                 <input
                   type="text"
-                  placeholder="Например: Тандзиро Камадо или Имя"
-                  value={formData.sender}
-                  onChange={(e) => setFormData({ ...formData, sender: e.target.value })}
+                  placeholder="Как к вам обращаться?"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   className="crow-input"
                 />
               </div>
@@ -92,7 +91,7 @@ export default function ContactPage() {
                 <input
                   type="email"
                   required
-                  placeholder="contact@yourdomain.com"
+                  placeholder="name@example.com"
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   className="crow-input"
@@ -100,11 +99,11 @@ export default function ContactPage() {
               </div>
 
               <div className="form-field">
-                <label>Суть свитка / Описание задачи *</label>
+                <label>Текст сообщения / Детали проекта *</label>
                 <textarea
                   required
                   rows={4}
-                  placeholder="Опишите ваш проект, стек, сроки или тему сотрудничества..."
+                  placeholder="Расскажите о вашей задаче, идее, сроках или стеке..."
                   value={formData.message}
                   onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                   className="crow-textarea"
@@ -113,24 +112,23 @@ export default function ContactPage() {
 
               <button type="submit" className="btn-demon-katana full-width">
                 <Send size={18} />
-                <span>Отправить Ворона уз</span>
-                <span className="kanji-btn-mark">飛</span>
+                <span>Отправить сообщение</span>
               </button>
             </form>
           )}
         </div>
 
-        {/* Right Direct Channels */}
+        {/* Direct Channels */}
         <div className="direct-channels-card glass-panel">
           <div className="channels-header">
             <ShieldCheck size={24} className="shield-icon" />
-            <h3 className="channels-title">Прямые Каналы Доступа</h3>
+            <h3 className="channels-title">Прямые каналы связи</h3>
           </div>
 
           <div className="channels-list">
             <div className="channel-box">
               <div className="ch-info">
-                <span className="ch-label">Email Столпа:</span>
+                <span className="ch-label">Email:</span>
                 <span className="ch-val">doomhex@slayer.dev</span>
               </div>
               <button
@@ -155,13 +153,13 @@ export default function ContactPage() {
                 onClick={() => soundEngine.playClick()}
               >
                 <GithubIcon size={16} />
-                <span>Открыть</span>
+                <span>Перейти</span>
               </a>
             </div>
 
             <div className="channel-box">
               <div className="ch-info">
-                <span className="ch-label">Telegram Канал:</span>
+                <span className="ch-label">Telegram:</span>
                 <span className="ch-val">@DoomHex</span>
               </div>
               <button
@@ -175,7 +173,7 @@ export default function ContactPage() {
 
             <div className="channel-box">
               <div className="ch-info">
-                <span className="ch-label">Discord Святилища:</span>
+                <span className="ch-label">Discord:</span>
                 <span className="ch-val">doomhex#1337</span>
               </div>
               <button
@@ -189,9 +187,9 @@ export default function ContactPage() {
           </div>
 
           <div className="sanctum-stamp-box">
-            <div className="sanctum-stamp-kanji">隠</div>
+            <Sparkles size={24} style={{ color: 'var(--neon-primary)', flexShrink: 0 }} />
             <p className="sanctum-stamp-text">
-              Все каналы защищены специальными глифами и печатью Корпуса. Сообщения обрабатываются ежедневно.
+              Открыт для интересных проектов, разработки новых интерфейсов и предложений о сотрудничестве.
             </p>
           </div>
         </div>

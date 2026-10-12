@@ -127,13 +127,13 @@ export default function App() {
       <footer className="sanctum-footer">
         <div className="footer-content-wrap">
           <div className="footer-left">
-            <div className="footer-kanji-seal">滅</div>
+            <div className="footer-kanji-seal">DH</div>
             <div>
               <div className="footer-credits">
-                <strong>DoomHex</strong> | Кибер-Столп Полного Дыхания (Demon Slayer Theme)
+                <strong>DoomHex</strong> | Frontend & Fullstack Developer (Demon Slayer Neon Theme)
               </div>
               <div className="footer-sub-note">
-                Все права защищены Корпусом Истребителей. Построено на React 19 + Vite.
+                Все права защищены. Разработано на React 19 + Vite с интерактивными неоновыми анимациями.
               </div>
             </div>
           </div>
@@ -149,9 +149,9 @@ export default function App() {
                 soundEngine.playClick()
               }}
               className="btn-reset-ghost"
-              title="Открыть врата панели администратора"
+              title="Открыть панель администратора"
             >
-              Врата Столпа
+              Панель управления
             </button>
           </div>
         </div>

@@ -1,13 +1,13 @@
 import React from 'react'
 import {
-  Swords,
   Sparkles,
   ArrowRight,
-  Flame,
-  Shield,
+  Code,
+  ShieldCheck,
   Zap,
-  Terminal,
-  ExternalLink
+  ExternalLink,
+  Swords,
+  Layers
 } from 'lucide-react'
 import GithubIcon from '../components/GithubIcon'
 import { soundEngine } from '../audio'
@@ -18,26 +18,16 @@ export default function HomePage({
   onSlash,
   projects
 }) {
-  const handleUnsheatheKatana = () => {
+  const handleTestSlash = () => {
     soundEngine.playSlash()
     if (onSlash) {
-      onSlash('НИТИРИН ОБНАЖЕН! 全集中!')
-    }
-  }
-
-  const getBreathingTitle = () => {
-    switch (breathing) {
-      case 'water': return 'Дыхание Воды (水の呼吸)'
-      case 'thunder': return 'Дыхание Грома (雷の呼吸)'
-      case 'moon': return 'Дыхание Луны (月の呼吸)'
-      case 'sun':
-      default: return 'Дыхание Солнца (日の呼吸)'
+      onSlash('НИТИРИН СЛЭШ ⚔️')
     }
   }
 
   return (
     <div className="page-container home-page">
-      {/* Hero Banner with Anime Art */}
+      {/* Hero Banner with Anime Art & Modern Copy */}
       <div className="hero-banner-frame">
         <div 
           className="hero-art-bg"
@@ -46,80 +36,91 @@ export default function HomePage({
         <div className="hero-art-overlay" />
 
         <div className="hero-content-inner">
-          {/* Breathing Rank Tag */}
+          {/* Status Badge Row */}
           <div className="hashira-badge-row">
             <span className="hashira-badge">
-              <span className="flame-icon">🔥</span>
-              <span>РАНГ: СТОЛП КОДА (HASHIRA)</span>
+              <span className="pulse-dot green" />
+              <span>ОТКРЫТ К НОВЫМ ПРОЕКТАМ</span>
             </span>
             <span className="breathing-live-tag">
-              <span className="pulse-dot" />
-              <span>{getBreathingTitle()}</span>
+              <Sparkles size={14} />
+              <span>НЕОНОВЫЙ АНИМЕ СТИЛЬ</span>
             </span>
           </div>
 
           <h1 className="hero-main-title">
-            <span className="kanji-subtitle-sub">全集中・電脳の呼吸</span>
+            <span className="kanji-subtitle-sub">FRONTEND & FULLSTACK</span>
             <br />
             DOOMHEX
           </h1>
 
           <p className="hero-epic-quote">
-            «Даже если твой дух на пределе — бей сильнее. 
-            Создаю бескомпромиссные цифровые веб-приложения, отточенные словно клинок Нитирин».
+            Создаю современные, быстрые и масштабируемые веб-приложения с продуманным интерфейсом, 
+            чистой архитектурой и вниманием к мельчайшим деталям.
           </p>
 
-          {/* Interactive Hero Actions */}
+          {/* Action Buttons */}
           <div className="hero-btn-row">
-            <button
-              onClick={handleUnsheatheKatana}
-              className="btn-demon-katana"
-            >
-              <Swords size={20} />
-              <span>Обнажить Клинок</span>
-              <span className="kanji-btn-mark">斬</span>
-            </button>
-
             <button
               onClick={() => {
                 setActivePage('projects')
                 soundEngine.playClick()
               }}
+              className="btn-demon-katana"
+            >
+              <Layers size={18} />
+              <span>Смотреть проекты ({projects.length})</span>
+            </button>
+
+            <button
+              onClick={() => {
+                setActivePage('contact')
+                soundEngine.playClick()
+              }}
               className="btn-neon-ghost"
             >
-              <Sparkles size={18} />
-              <span>Смотреть Квесты ({projects.length})</span>
+              <span>Связаться со мной</span>
               <ArrowRight size={16} />
+            </button>
+
+            {/* Interactive Blade Slash Easter Egg */}
+            <button
+              onClick={handleTestSlash}
+              className="btn-neon-ghost"
+              title="Запустить анимацию удара клинка"
+            >
+              <Swords size={17} />
+              <span>Эффект клинка</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Slayer Combat Stats */}
+      {/* Developer Stats Section */}
       <section className="slayer-stats-section">
         <div className="stats-neon-grid">
           <div className="stat-card glass-panel">
             <div className="stat-header">
               <div className="stat-icon-wrap red-glow">
-                <Flame size={22} />
+                <Code size={22} />
               </div>
-              <span className="stat-kanji">滅</span>
+              <span className="stat-kanji">4+</span>
             </div>
-            <div className="stat-number">2,400+</div>
-            <div className="stat-label">Поверженных Багов (Demons Slain)</div>
-            <div className="stat-sub">100% покрытие тестами и чистый код</div>
+            <div className="stat-number">4+ Года</div>
+            <div className="stat-label">Практического Опыта</div>
+            <div className="stat-sub">React, TypeScript, экосистема современных веб-сервисов</div>
           </div>
 
           <div className="stat-card glass-panel">
             <div className="stat-header">
               <div className="stat-icon-wrap cyan-glow">
-                <Shield size={22} />
+                <ShieldCheck size={22} />
               </div>
-              <span className="stat-kanji">守</span>
+              <span className="stat-kanji">100%</span>
             </div>
-            <div className="stat-number">99.99%</div>
-            <div className="stat-label">Безупречная Защита Uptime</div>
-            <div className="stat-sub">Отказоустойчивые веб-системы</div>
+            <div className="stat-number">99.9% Uptime</div>
+            <div className="stat-label">Чистая Архитектура</div>
+            <div className="stat-sub">Отказоустойчивость, чистый код и покрытие тестами</div>
           </div>
 
           <div className="stat-card glass-panel">
@@ -127,22 +128,22 @@ export default function HomePage({
               <div className="stat-icon-wrap yellow-glow">
                 <Zap size={22} />
               </div>
-              <span className="stat-kanji">迅</span>
+              <span className="stat-kanji">&lt;</span>
             </div>
-            <div className="stat-number">&lt; 150ms</div>
-            <div className="stat-label">Скорость Атаки (TTFB)</div>
-            <div className="stat-sub">Молниеносный рендеринг Vite & React</div>
+            <div className="stat-number">&lt; 100ms</div>
+            <div className="stat-label">Оптимизация Скорости</div>
+            <div className="stat-sub">Мгновенный отклик интерфейса и быстрая загрузка</div>
           </div>
         </div>
       </section>
 
-      {/* Featured Quests Showcase */}
+      {/* Featured Projects Showcase */}
       <section className="home-featured-section">
         <div className="section-title-wrap">
-          <div className="section-kanji-tag">任務</div>
-          <h2 className="neon-section-heading">Избранные Миссии Столпа</h2>
+          <div className="section-kanji-tag">ПОРТФОЛИО</div>
+          <h2 className="neon-section-heading">Избранные Проекты</h2>
           <p className="section-description">
-            Ключевые цифровые миссии и архитектурные решения DoomHex
+            Ключевые веб-приложения и программные решения разработчика DoomHex
           </p>
         </div>
 
@@ -150,8 +151,8 @@ export default function HomePage({
           {projects.slice(0, 3).map((proj) => (
             <div key={proj.id} className="quest-card glass-panel">
               <div className="quest-top-bar">
-                <span className="quest-rank-pill">{proj.rank}</span>
-                <span className="quest-kanji-hint">{proj.japaneseTitle}</span>
+                <span className="quest-rank-pill">{proj.category || 'Web App'}</span>
+                <span className="quest-kanji-hint">{proj.stats?.status || 'Active'}</span>
               </div>
 
               <h3 className="quest-title">{proj.title}</h3>
@@ -172,7 +173,7 @@ export default function HomePage({
                   onClick={() => soundEngine.playClick()}
                 >
                   <ExternalLink size={15} />
-                  <span>Открыть</span>
+                  <span>Демо</span>
                 </a>
                 <a
                   href={proj.githubUrl}
@@ -182,7 +183,7 @@ export default function HomePage({
                   onClick={() => soundEngine.playClick()}
                 >
                   <GithubIcon size={15} />
-                  <span>Репозиторий</span>
+                  <span>GitHub</span>
                 </a>
               </div>
             </div>
@@ -197,7 +198,7 @@ export default function HomePage({
             }}
             className="btn-demon-katana outline"
           >
-            <span>Все миссии и проекты</span>
+            <span>Все проекты портфолио</span>
             <ArrowRight size={16} />
           </button>
         </div>
