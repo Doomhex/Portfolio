@@ -84,7 +84,7 @@ export default function App() {
   const renderCurrentPage = () => {
     switch (activePage) {
       case 'about':
-        return <AboutPage onSlash={triggerSlash} content={siteContent.about} />
+        return <AboutPage onSlash={triggerSlash} content={siteContent.about} images={siteContent.images || {}} />
       case 'projects':
         return <ProjectsPage projects={projects} setActivePage={setActivePage} />
       case 'breathing':
@@ -110,6 +110,7 @@ export default function App() {
             onSlash={triggerSlash}
             projects={projects}
             content={siteContent.home}
+            images={siteContent.images || {}}
           />
         )
     }

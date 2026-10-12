@@ -12,7 +12,9 @@ import {
 } from 'lucide-react'
 import { soundEngine } from '../audio'
 
-export default function AboutPage({ onSlash, content = {} }) {
+export default function AboutPage({ onSlash, content = {}, images = {} }) {
+  const avatarImg = images.avatar || content.avatar || '/images/avatar.jpg'
+
   const skillsList = [
     { name: 'React 19 & Next.js', level: '98%', rank: 'Продвинутый уровень', desc: 'Хуки, управление состоянием, SSR/SSG, оптимизация', icon: <Code size={18} /> },
     { name: 'TypeScript & JavaScript', level: '95%', rank: 'Строгая типизация', desc: 'Чистый код, интерфейсы, масштабируемые типы данных', icon: <Cpu size={18} /> },
@@ -29,6 +31,24 @@ export default function AboutPage({ onSlash, content = {} }) {
     }
   }
 
+  const hasBadge1 = Boolean(content.badge1?.trim())
+  const hasBadge2 = Boolean(content.badge2?.trim())
+  const hasBadgeRow = hasBadge1 || hasBadge2
+
+  const hasName = Boolean(content.name?.trim())
+  const hasBio = Boolean(content.bio?.trim())
+
+  const hasSpec1 = Boolean(content.spec1Label?.trim() || content.spec1Val?.trim())
+  const hasSpec2 = Boolean(content.spec2Label?.trim() || content.spec2Val?.trim())
+  const hasSpec3 = Boolean(content.spec3Label?.trim() || content.spec3Val?.trim())
+  const hasSpec4 = Boolean(content.spec4Label?.trim() || content.spec4Val?.trim())
+  const hasSpecsGrid = hasSpec1 || hasSpec2 || hasSpec3 || hasSpec4
+
+  const hasSkillsHeading = Boolean(content.skillsHeading?.trim())
+  const hasSkillsSub = Boolean(content.skillsSub?.trim())
+
+  const hasPrinciples = Boolean(content.principlesHeading?.trim() || content.principlesText?.trim())
+
   return (
     <div className="page-container about-page">
       {/* Profile Header Card */}
@@ -36,7 +56,7 @@ export default function AboutPage({ onSlash, content = {} }) {
         <div className="about-avatar-col">
           <div className="avatar-frame-glow">
             <img
-              src="/images/avatar.jpg"
+              src={avatarImg}
               alt="DoomHex Avatar"
               className="doomhex-avatar-img"
             />
@@ -49,49 +69,65 @@ export default function AboutPage({ onSlash, content = {} }) {
         </div>
 
         <div className="about-bio-col">
-          <div className="badge-row">
-            <span className="slayer-corp-tag">{content.badge1 || 'FULLSTACK DEVELOPER'}</span>
-            <span className="hashira-title-tag">{content.badge2 || 'REACT & TYPESCRIPT'}</span>
-          </div>
+          {hasBadgeRow && (
+            <div className="badge-row">
+              {hasBadge1 && <span className="slayer-corp-tag">{content.badge1}</span>}
+              {hasBadge2 && <span className="hashira-title-tag">{content.badge2}</span>}
+            </div>
+          )}
 
-          <h1 className="about-name">
-            {content.name || 'DoomHex'}
-          </h1>
+          {hasName && (
+            <h1 className="about-name">
+              {content.name}
+            </h1>
+          )}
 
-          <p className="about-lead">
-            {content.bio || 'Привет! Я разработчик интерфейсов и веб-приложений. Создаю быстрые, отзывчивые и визуально выразительные цифровые продукты с акцентом на надежность, чистую компонентную архитектуру и отличный пользовательский опыт.'}
-          </p>
+          {hasBio && (
+            <p className="about-lead">
+              {content.bio}
+            </p>
+          )}
 
-          <div className="slayer-specs-grid">
-            <div className="spec-item">
-              <span className="spec-label">{content.spec1Label || 'Специализация:'}</span>
-              <span className="spec-val">{content.spec1Val || 'Frontend & Fullstack Web Development'}</span>
+          {hasSpecsGrid && (
+            <div className="slayer-specs-grid">
+              {hasSpec1 && (
+                <div className="spec-item">
+                  {content.spec1Label && <span className="spec-label">{content.spec1Label}</span>}
+                  {content.spec1Val && <span className="spec-val">{content.spec1Val}</span>}
+                </div>
+              )}
+              {hasSpec2 && (
+                <div className="spec-item">
+                  {content.spec2Label && <span className="spec-label">{content.spec2Label}</span>}
+                  {content.spec2Val && <span className="spec-val">{content.spec2Val}</span>}
+                </div>
+              )}
+              {hasSpec3 && (
+                <div className="spec-item">
+                  {content.spec3Label && <span className="spec-label">{content.spec3Label}</span>}
+                  {content.spec3Val && <span className="spec-val">{content.spec3Val}</span>}
+                </div>
+              )}
+              {hasSpec4 && (
+                <div className="spec-item">
+                  {content.spec4Label && <span className="spec-label">{content.spec4Label}</span>}
+                  {content.spec4Val && <span className="spec-val">{content.spec4Val}</span>}
+                </div>
+              )}
             </div>
-            <div className="spec-item">
-              <span className="spec-label">{content.spec2Label || 'Основной стек:'}</span>
-              <span className="spec-val">{content.spec2Val || 'React 19, TypeScript, Vite, Node.js'}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">{content.spec3Label || 'Подход:'}</span>
-              <span className="spec-val">{content.spec3Val || 'Clean Architecture, Component-Driven'}</span>
-            </div>
-            <div className="spec-item">
-              <span className="spec-label">{content.spec4Label || 'Деплой & Хостинг:'}</span>
-              <span className="spec-val">{content.spec4Val || 'GitHub, Vercel, Cloud Services'}</span>
-            </div>
-          </div>
+          )}
         </div>
       </div>
 
       {/* Skills Matrix */}
       <section className="about-skills-section">
-        <div className="section-title-wrap">
-          <div className="section-kanji-tag">СТЕК И НАВЫКИ</div>
-          <h2 className="neon-section-heading">{content.skillsHeading || 'Технологии & Компетенции'}</h2>
-          <p className="section-description">
-            {content.skillsSub || 'Инструменты и технологии, которые я использую для реализации клиентских и серверных задач'}
-          </p>
-        </div>
+        {(hasSkillsHeading || hasSkillsSub) && (
+          <div className="section-title-wrap">
+            <div className="section-kanji-tag">СТЕК И НАВЫКИ</div>
+            {hasSkillsHeading && <h2 className="neon-section-heading">{content.skillsHeading}</h2>}
+            {hasSkillsSub && <p className="section-description">{content.skillsSub}</p>}
+          </div>
+        )}
 
         <div className="skills-meter-grid">
           {skillsList.map((skill, index) => (
@@ -126,18 +162,18 @@ export default function AboutPage({ onSlash, content = {} }) {
         </div>
       </section>
 
-      {/* Principles Card */}
-      <section className="hashira-oath-card glass-panel">
-        <div className="oath-left">
-          <ShieldCheck size={48} style={{ color: 'var(--neon-primary)' }} />
-        </div>
-        <div className="oath-right">
-          <h3 className="oath-heading">{content.principlesHeading || 'Принципы разработки DoomHex'}</h3>
-          <p className="oath-text">
-            {content.principlesText || 'Писать поддерживаемый и понятный код, тестировать интерфейсы на реальных устройствах, не допускать замедления страниц и всегда доводить проект до идеального состояния перед релизом.'}
-          </p>
-        </div>
-      </section>
+      {/* Principles Card - Completely hidden if heading and text are deleted */}
+      {hasPrinciples && (
+        <section className="hashira-oath-card glass-panel">
+          <div className="oath-left">
+            <ShieldCheck size={48} style={{ color: 'var(--neon-primary)' }} />
+          </div>
+          <div className="oath-right">
+            {content.principlesHeading && <h3 className="oath-heading">{content.principlesHeading}</h3>}
+            {content.principlesText && <p className="oath-text">{content.principlesText}</p>}
+          </div>
+        </section>
+      )}
     </div>
   )
 }

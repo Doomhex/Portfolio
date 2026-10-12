@@ -1,4 +1,8 @@
 export const DEFAULT_SITE_CONTENT = {
+  images: {
+    heroBg: '/images/hero.jpg',
+    avatar: '/images/avatar.jpg'
+  },
   home: {
     badgeText: 'ОТКРЫТ К НОВЫМ ПРОЕКТАМ',
     tagText: 'НЕОНОВЫЙ АНИМЕ СТИЛЬ',

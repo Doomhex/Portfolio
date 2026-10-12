@@ -17,7 +17,8 @@ export default function HomePage({
   breathing,
   onSlash,
   projects,
-  content = {}
+  content = {},
+  images = {}
 }) {
   const handleTestSlash = () => {
     soundEngine.playSlash()
@@ -26,183 +27,244 @@ export default function HomePage({
     }
   }
 
+  const heroBg = images.heroBg || content.heroBg || '/images/hero.jpg'
+
+  // Conditional flags: Check if fields exist and are not empty
+  const hasBadge = Boolean(content.badgeText?.trim())
+  const hasTag = Boolean(content.tagText?.trim())
+  const hasBadgeRow = hasBadge || hasTag
+
+  const hasPreTitle = Boolean(content.preTitle?.trim())
+  const hasMainTitle = Boolean(content.mainTitle?.trim())
+  const hasDesc = Boolean(content.description?.trim())
+
+  const hasProjectsBtn = Boolean(content.projectsBtnText?.trim())
+  const hasContactBtn = Boolean(content.contactBtnText?.trim())
+  const hasBladeBtn = Boolean(content.bladeBtnText?.trim())
+  const hasBtnRow = hasProjectsBtn || hasContactBtn || hasBladeBtn
+
+  const hasStat1 = Boolean(content.stat1Value?.trim() || content.stat1Title?.trim() || content.stat1Desc?.trim())
+  const hasStat2 = Boolean(content.stat2Value?.trim() || content.stat2Title?.trim() || content.stat2Desc?.trim())
+  const hasStat3 = Boolean(content.stat3Value?.trim() || content.stat3Title?.trim() || content.stat3Desc?.trim())
+  const hasStatsSection = hasStat1 || hasStat2 || hasStat3
+
+  const hasFeaturedHeading = Boolean(content.featuredHeading?.trim())
+  const hasFeaturedSub = Boolean(content.featuredSub?.trim())
+
   return (
     <div className="page-container home-page">
       {/* Hero Banner with Anime Art & Dynamic Copy */}
       <div className="hero-banner-frame">
         <div 
           className="hero-art-bg"
-          style={{ backgroundImage: `url(/images/hero.jpg)` }}
+          style={{ backgroundImage: `url(${heroBg})` }}
         />
         <div className="hero-art-overlay" />
 
         <div className="hero-content-inner">
           {/* Status Badge Row */}
-          <div className="hashira-badge-row">
-            <span className="hashira-badge">
-              <span className="pulse-dot green" />
-              <span>{content.badgeText || 'ОТКРЫТ К НОВЫМ ПРОЕКТАМ'}</span>
-            </span>
-            <span className="breathing-live-tag">
-              <Sparkles size={14} />
-              <span>{content.tagText || 'НЕОНОВЫЙ АНИМЕ СТИЛЬ'}</span>
-            </span>
-          </div>
+          {hasBadgeRow && (
+            <div className="hashira-badge-row">
+              {hasBadge && (
+                <span className="hashira-badge">
+                  <span className="pulse-dot green" />
+                  <span>{content.badgeText}</span>
+                </span>
+              )}
+              {hasTag && (
+                <span className="breathing-live-tag">
+                  <Sparkles size={14} />
+                  <span>{content.tagText}</span>
+                </span>
+              )}
+            </div>
+          )}
 
-          <h1 className="hero-main-title">
-            <span className="kanji-subtitle-sub">{content.preTitle || 'FRONTEND & FULLSTACK'}</span>
-            <br />
-            {content.mainTitle || 'DOOMHEX'}
-          </h1>
+          {(hasPreTitle || hasMainTitle) && (
+            <h1 className="hero-main-title">
+              {hasPreTitle && (
+                <>
+                  <span className="kanji-subtitle-sub">{content.preTitle}</span>
+                  <br />
+                </>
+              )}
+              {hasMainTitle && content.mainTitle}
+            </h1>
+          )}
 
-          <p className="hero-epic-quote">
-            {content.description || 'Создаю современные, быстрые и масштабируемые веб-приложения с продуманным интерфейсом, чистой архитектурой и вниманием к мельчайшим деталям.'}
-          </p>
+          {hasDesc && (
+            <p className="hero-epic-quote">
+              {content.description}
+            </p>
+          )}
 
           {/* Action Buttons */}
-          <div className="hero-btn-row">
+          {hasBtnRow && (
+            <div className="hero-btn-row">
+              {hasProjectsBtn && (
+                <button
+                  onClick={() => {
+                    setActivePage('projects')
+                    soundEngine.playClick()
+                  }}
+                  className="btn-demon-katana"
+                >
+                  <Layers size={18} />
+                  <span>{content.projectsBtnText} ({projects.length})</span>
+                </button>
+              )}
+
+              {hasContactBtn && (
+                <button
+                  onClick={() => {
+                    setActivePage('contact')
+                    soundEngine.playClick()
+                  }}
+                  className="btn-neon-ghost"
+                >
+                  <span>{content.contactBtnText}</span>
+                  <ArrowRight size={16} />
+                </button>
+              )}
+
+              {hasBladeBtn && (
+                <button
+                  onClick={handleTestSlash}
+                  className="btn-neon-ghost"
+                  title="Запустить анимацию удара клинка"
+                >
+                  <Swords size={17} />
+                  <span>{content.bladeBtnText}</span>
+                </button>
+              )}
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Developer Stats Section - Only rendered if at least one stat has text */}
+      {hasStatsSection && (
+        <section className="slayer-stats-section">
+          <div className="stats-neon-grid">
+            {hasStat1 && (
+              <div className="stat-card glass-panel">
+                <div className="stat-header">
+                  <div className="stat-icon-wrap red-glow">
+                    <Code size={22} />
+                  </div>
+                  <span className="stat-kanji">01</span>
+                </div>
+                {content.stat1Value && <div className="stat-number">{content.stat1Value}</div>}
+                {content.stat1Title && <div className="stat-label">{content.stat1Title}</div>}
+                {content.stat1Desc && <div className="stat-sub">{content.stat1Desc}</div>}
+              </div>
+            )}
+
+            {hasStat2 && (
+              <div className="stat-card glass-panel">
+                <div className="stat-header">
+                  <div className="stat-icon-wrap cyan-glow">
+                    <ShieldCheck size={22} />
+                  </div>
+                  <span className="stat-kanji">02</span>
+                </div>
+                {content.stat2Value && <div className="stat-number">{content.stat2Value}</div>}
+                {content.stat2Title && <div className="stat-label">{content.stat2Title}</div>}
+                {content.stat2Desc && <div className="stat-sub">{content.stat2Desc}</div>}
+              </div>
+            )}
+
+            {hasStat3 && (
+              <div className="stat-card glass-panel">
+                <div className="stat-header">
+                  <div className="stat-icon-wrap yellow-glow">
+                    <Zap size={22} />
+                  </div>
+                  <span className="stat-kanji">03</span>
+                </div>
+                {content.stat3Value && <div className="stat-number">{content.stat3Value}</div>}
+                {content.stat3Title && <div className="stat-label">{content.stat3Title}</div>}
+                {content.stat3Desc && <div className="stat-sub">{content.stat3Desc}</div>}
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* Featured Projects Showcase */}
+      {projects && projects.length > 0 && (
+        <section className="home-featured-section">
+          {(hasFeaturedHeading || hasFeaturedSub) && (
+            <div className="section-title-wrap">
+              <div className="section-kanji-tag">ПОРТФОЛИО</div>
+              {hasFeaturedHeading && <h2 className="neon-section-heading">{content.featuredHeading}</h2>}
+              {hasFeaturedSub && <p className="section-description">{content.featuredSub}</p>}
+            </div>
+          )}
+
+          <div className="featured-cards-grid">
+            {projects.slice(0, 3).map((proj) => (
+              <div key={proj.id} className="quest-card glass-panel">
+                <div className="quest-top-bar">
+                  <span className="quest-rank-pill">{proj.category || 'Web App'}</span>
+                  {proj.stats?.status && <span className="quest-kanji-hint">{proj.stats.status}</span>}
+                </div>
+
+                <h3 className="quest-title">{proj.title}</h3>
+                {proj.description && <p className="quest-desc">{proj.description}</p>}
+
+                {proj.tags && proj.tags.length > 0 && (
+                  <div className="quest-tags-wrap">
+                    {proj.tags.map((t, idx) => (
+                      <span key={idx} className="quest-tag-item">#{t}</span>
+                    ))}
+                  </div>
+                )}
+
+                <div className="quest-actions-row">
+                  {proj.demoUrl && (
+                    <a
+                      href={proj.demoUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="quest-link-btn primary"
+                      onClick={() => soundEngine.playClick()}
+                    >
+                      <ExternalLink size={15} />
+                      <span>Демо</span>
+                    </a>
+                  )}
+                  {proj.githubUrl && (
+                    <a
+                      href={proj.githubUrl}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="quest-link-btn"
+                      onClick={() => soundEngine.playClick()}
+                    >
+                      <GithubIcon size={15} />
+                      <span>GitHub</span>
+                    </a>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="center-more-cta">
             <button
               onClick={() => {
                 setActivePage('projects')
                 soundEngine.playClick()
               }}
-              className="btn-demon-katana"
+              className="btn-demon-katana outline"
             >
-              <Layers size={18} />
-              <span>{content.projectsBtnText || 'Смотреть проекты'} ({projects.length})</span>
-            </button>
-
-            <button
-              onClick={() => {
-                setActivePage('contact')
-                soundEngine.playClick()
-              }}
-              className="btn-neon-ghost"
-            >
-              <span>{content.contactBtnText || 'Связаться со мной'}</span>
+              <span>Все проекты портфолио</span>
               <ArrowRight size={16} />
             </button>
-
-            {/* Interactive Blade Slash Easter Egg */}
-            <button
-              onClick={handleTestSlash}
-              className="btn-neon-ghost"
-              title="Запустить анимацию удара клинка"
-            >
-              <Swords size={17} />
-              <span>{content.bladeBtnText || 'Эффект клинка'}</span>
-            </button>
           </div>
-        </div>
-      </div>
-
-      {/* Developer Stats Section */}
-      <section className="slayer-stats-section">
-        <div className="stats-neon-grid">
-          <div className="stat-card glass-panel">
-            <div className="stat-header">
-              <div className="stat-icon-wrap red-glow">
-                <Code size={22} />
-              </div>
-              <span className="stat-kanji">4+</span>
-            </div>
-            <div className="stat-number">{content.stat1Value || '4+ Года'}</div>
-            <div className="stat-label">{content.stat1Title || 'Практического Опыта'}</div>
-            <div className="stat-sub">{content.stat1Desc || 'React, TypeScript, экосистема современных веб-сервисов'}</div>
-          </div>
-
-          <div className="stat-card glass-panel">
-            <div className="stat-header">
-              <div className="stat-icon-wrap cyan-glow">
-                <ShieldCheck size={22} />
-              </div>
-              <span className="stat-kanji">100%</span>
-            </div>
-            <div className="stat-number">{content.stat2Value || '99.9% Uptime'}</div>
-            <div className="stat-label">{content.stat2Title || 'Чистая Архитектура'}</div>
-            <div className="stat-sub">{content.stat2Desc || 'Отказоустойчивость, чистый код и покрытие тестами'}</div>
-          </div>
-
-          <div className="stat-card glass-panel">
-            <div className="stat-header">
-              <div className="stat-icon-wrap yellow-glow">
-                <Zap size={22} />
-              </div>
-              <span className="stat-kanji">&lt;</span>
-            </div>
-            <div className="stat-number">{content.stat3Value || '< 100ms'}</div>
-            <div className="stat-label">{content.stat3Title || 'Оптимизация Скорости'}</div>
-            <div className="stat-sub">{content.stat3Desc || 'Мгновенный отклик интерфейса и быстрая загрузка'}</div>
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Projects Showcase */}
-      <section className="home-featured-section">
-        <div className="section-title-wrap">
-          <div className="section-kanji-tag">ПОРТФОЛИО</div>
-          <h2 className="neon-section-heading">{content.featuredHeading || 'Избранные Проекты'}</h2>
-          <p className="section-description">
-            {content.featuredSub || 'Ключевые веб-приложения и программные решения разработчика DoomHex'}
-          </p>
-        </div>
-
-        <div className="featured-cards-grid">
-          {projects.slice(0, 3).map((proj) => (
-            <div key={proj.id} className="quest-card glass-panel">
-              <div className="quest-top-bar">
-                <span className="quest-rank-pill">{proj.category || 'Web App'}</span>
-                <span className="quest-kanji-hint">{proj.stats?.status || 'Active'}</span>
-              </div>
-
-              <h3 className="quest-title">{proj.title}</h3>
-              <p className="quest-desc">{proj.description}</p>
-
-              <div className="quest-tags-wrap">
-                {proj.tags.map((t, idx) => (
-                  <span key={idx} className="quest-tag-item">#{t}</span>
-                ))}
-              </div>
-
-              <div className="quest-actions-row">
-                <a
-                  href={proj.demoUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="quest-link-btn primary"
-                  onClick={() => soundEngine.playClick()}
-                >
-                  <ExternalLink size={15} />
-                  <span>Демо</span>
-                </a>
-                <a
-                  href={proj.githubUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="quest-link-btn"
-                  onClick={() => soundEngine.playClick()}
-                >
-                  <GithubIcon size={15} />
-                  <span>GitHub</span>
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-
-        <div className="center-more-cta">
-          <button
-            onClick={() => {
-              setActivePage('projects')
-              soundEngine.playClick()
-            }}
-            className="btn-demon-katana outline"
-          >
-            <span>Все проекты портфолио</span>
-            <ArrowRight size={16} />
-          </button>
-        </div>
-      </section>
+        </section>
+      )}
     </div>
   )
 }

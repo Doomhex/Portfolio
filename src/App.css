@@ -1063,6 +1063,12 @@
   gap: 30px;
 }
 
+.contact-crow-layout.single-column {
+  grid-template-columns: 1fr;
+  max-width: 680px;
+  margin: 0 auto;
+}
+
 .crow-form-card,
 .direct-channels-card {
   padding: 36px;
