@@ -24,7 +24,8 @@ export default function Navbar({
   setBreathing,
   isMuted,
   setIsMuted,
-  onSlash
+  onSlash,
+  avatar
 }) {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
 
@@ -76,7 +77,19 @@ export default function Navbar({
           className="navbar-brand-group" 
           onClick={() => handleNavClick('home')}
         >
-          <div className="kanji-crest">DH</div>
+          <div className="navbar-brand-avatar-crest">
+            <img 
+              src={avatar || '/images/avatar.jpg'} 
+              alt="DoomHex" 
+              className="navbar-brand-avatar-img"
+              onError={(e) => {
+                e.currentTarget.style.display = 'none'
+                const fallback = e.currentTarget.parentElement?.querySelector('.kanji-crest.fallback')
+                if (fallback) fallback.style.display = 'flex'
+              }}
+            />
+            <div className="kanji-crest fallback" style={{ display: 'none' }}>DH</div>
+          </div>
           <div className="brand-text-block">
             <span className="brand-name">DoomHex</span>
             <span className="brand-sub">FRONTEND & FULLSTACK DEVELOPER</span>

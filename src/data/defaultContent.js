@@ -5,7 +5,6 @@ export const DEFAULT_SITE_CONTENT = {
   },
   home: {
     badgeText: 'ОТКРЫТ К НОВЫМ ПРОЕКТАМ',
-    tagText: 'НЕОНОВЫЙ АНИМЕ СТИЛЬ',
     preTitle: 'FRONTEND & FULLSTACK',
     mainTitle: 'DOOMHEX',
     description: 'Создаю современные, быстрые и масштабируемые веб-приложения с продуманным интерфейсом, чистой архитектурой и вниманием к мельчайшим деталям.',

@@ -137,6 +137,7 @@ export default function App() {
         isMuted={isMuted}
         setIsMuted={setIsMuted}
         onSlash={triggerSlash}
+        avatar={siteContent.images?.avatar || '/images/avatar.jpg'}
       />
 
       {/* Active Page View */}

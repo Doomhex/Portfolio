@@ -532,27 +532,15 @@ export default function AdminPage({
                 {/* ================= HOME SECTION ================= */}
                 {contentSection === 'home' && (
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-                    <div className="form-grid-2">
-                      <div className="form-field">
-                        <label>Статус-бейдж (если очистить — скроется)</label>
-                        <input
-                          type="text"
-                          placeholder="Пусто = скрыть бейдж"
-                          value={editableContent.home?.badgeText || ''}
-                          onChange={(e) => handleContentFieldChange('home', 'badgeText', e.target.value)}
-                          className="crow-input"
-                        />
-                      </div>
-                      <div className="form-field">
-                        <label>Текст темы справа (если очистить — скроется)</label>
-                        <input
-                          type="text"
-                          placeholder="Пусто = скрыть"
-                          value={editableContent.home?.tagText || ''}
-                          onChange={(e) => handleContentFieldChange('home', 'tagText', e.target.value)}
-                          className="crow-input"
-                        />
-                      </div>
+                    <div className="form-field">
+                      <label>Статус-бейдж (напр. "ОТКРЫТ К НОВЫМ ПРОЕКТАМ", если очистить — скроется)</label>
+                      <input
+                        type="text"
+                        placeholder="Пусто = скрыть бейдж"
+                        value={editableContent.home?.badgeText || ''}
+                        onChange={(e) => handleContentFieldChange('home', 'badgeText', e.target.value)}
+                        className="crow-input"
+                      />
                     </div>
 
                     <div className="form-grid-2">

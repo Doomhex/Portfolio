@@ -31,8 +31,7 @@ export default function HomePage({
 
   // Conditional flags: Check if fields exist and are not empty
   const hasBadge = Boolean(content.badgeText?.trim())
-  const hasTag = Boolean(content.tagText?.trim())
-  const hasBadgeRow = hasBadge || hasTag
+  const hasBadgeRow = hasBadge
 
   const hasPreTitle = Boolean(content.preTitle?.trim())
   const hasMainTitle = Boolean(content.mainTitle?.trim())
@@ -69,12 +68,6 @@ export default function HomePage({
                 <span className="hashira-badge">
                   <span className="pulse-dot green" />
                   <span>{content.badgeText}</span>
-                </span>
-              )}
-              {hasTag && (
-                <span className="breathing-live-tag">
-                  <Sparkles size={14} />
-                  <span>{content.tagText}</span>
                 </span>
               )}
             </div>
