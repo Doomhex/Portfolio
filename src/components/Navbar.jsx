@@ -41,8 +41,7 @@ export default function Navbar({
     { id: 'about', label: 'Обо мне', icon: <User size={16} /> },
     { id: 'projects', label: 'Проекты', icon: <Layers size={16} /> },
     { id: 'breathing', label: 'Эффекты & FX', icon: <Sparkles size={16} /> },
-    { id: 'contact', label: 'Контакты', icon: <Send size={16} /> },
-    { id: 'admin', label: 'Админка', icon: <Lock size={16} /> }
+    { id: 'contact', label: 'Контакты', icon: <Send size={16} /> }
   ]
 
   const handleBreathingChange = (styleId) => {
@@ -135,8 +134,19 @@ export default function Navbar({
             onClick={handleAudioToggle}
             className={`sound-toggle-btn ${isMuted ? 'muted' : ''}`}
             title={isMuted ? 'Включить интерактивные звуки' : 'Выключить звук'}
+            aria-label={isMuted ? 'Включить звук' : 'Выключить звук'}
           >
             {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
+          </button>
+
+          {/* PC-only Admin Quick Button (round button with User icon) */}
+          <button
+            onClick={() => handleNavClick('admin')}
+            className={`sound-toggle-btn admin-round-btn ${activePage === 'admin' ? 'active' : ''}`}
+            title="Панель администратора"
+            aria-label="Панель администратора"
+          >
+            <User size={16} />
           </button>
 
           {/* Mobile hamburger */}
