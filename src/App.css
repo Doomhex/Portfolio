@@ -1054,25 +1054,47 @@
 }
 
 .filter-btn {
-  padding: 6px 14px;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 7px 14px;
   border-radius: var(--radius-full);
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.09);
   color: var(--text-muted);
   font-size: 0.84rem;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
+  white-space: nowrap;
 }
 
 .filter-btn:hover {
   color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .filter-btn.active {
-  background: rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.12);
   color: #fff;
-  border-color: var(--neon-border);
+  border-color: var(--neon-primary);
+  box-shadow: 0 0 14px -2px var(--neon-glow);
+}
+
+.filter-count-badge {
+  font-size: 0.72rem;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  padding: 1px 6px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-subtle);
+}
+
+.filter-btn.active .filter-count-badge {
+  background: var(--neon-primary);
+  color: #000;
 }
 
 .add-new-quest-shortcut-btn {

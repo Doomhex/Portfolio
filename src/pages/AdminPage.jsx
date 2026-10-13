@@ -211,7 +211,7 @@ export default function AdminPage({
   const resetProjectForm = () => {
     setEditingId(null)
     setTitle('')
-    setCategory('Frontend & Web App')
+    setCategory('Веб-разработка')
     setBreathing('sun')
     setDescription('')
     setTagsInput('')
@@ -1107,11 +1107,37 @@ export default function AdminPage({
                       <label>Категория проекта</label>
                       <input
                         type="text"
-                        placeholder="Например: Fullstack Web App, UI Library, Mobile Web"
+                        placeholder="Например: Веб-разработка, Telegram-боты, VR игры..."
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         className="crow-input"
                       />
+                      <div style={{ display: 'flex', gap: '6px', flexWrap: 'wrap', marginTop: '8px' }}>
+                        {[
+                          'Веб-разработка',
+                          'Telegram-боты',
+                          'Игры Unreal & Unity',
+                          'VR игры',
+                          'Виртуальные туры & Фото 360',
+                          'Arduino & Микроконтроллеры',
+                          'Приложения & Сервисы'
+                        ].map((catPreset) => (
+                          <button
+                            key={catPreset}
+                            type="button"
+                            onClick={() => setCategory(catPreset)}
+                            className="filter-btn"
+                            style={{
+                              fontSize: '0.74rem',
+                              padding: '3px 8px',
+                              background: category === catPreset ? 'var(--neon-primary)' : 'rgba(255,255,255,0.05)',
+                              color: category === catPreset ? '#000' : 'var(--text-muted)'
+                            }}
+                          >
+                            {catPreset}
+                          </button>
+                        ))}
+                      </div>
                     </div>
                   </div>
 

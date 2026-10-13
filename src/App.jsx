@@ -16,12 +16,11 @@ import './App.css'
 export default function App() {
   const [activePage, setActivePage] = useState('home')
   const [breathing, setBreathing] = useState('sun')
-  const [isMuted, setIsMuted] = useState(false)
 
   // Persistent projects in localStorage
   const [projects, setProjects] = useState(() => {
     try {
-      const saved = localStorage.getItem('doomhex_quests_db')
+      const saved = localStorage.getItem('doomhex_quests_db_v3')
       return saved ? JSON.parse(saved) : INITIAL_PROJECTS
     } catch (e) {
       return INITIAL_PROJECTS
@@ -44,7 +43,7 @@ export default function App() {
 
   useEffect(() => {
     try {
-      localStorage.setItem('doomhex_quests_db', JSON.stringify(projects))
+      localStorage.setItem('doomhex_quests_db_v3', JSON.stringify(projects))
     } catch (e) {}
   }, [projects])
 
@@ -134,8 +133,6 @@ export default function App() {
         setActivePage={setActivePage}
         breathing={breathing}
         setBreathing={setBreathing}
-        isMuted={isMuted}
-        setIsMuted={setIsMuted}
         onSlash={triggerSlash}
         avatar={siteContent.images?.avatar || '/images/avatar.jpg'}
       />

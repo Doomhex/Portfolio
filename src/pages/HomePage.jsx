@@ -196,7 +196,7 @@ export default function HomePage({
           )}
 
           <div className="featured-cards-grid">
-            {projects.slice(0, 3).map((proj) => (
+            {projects.slice(0, 6).map((proj) => (
               <div key={proj.id} className="quest-card glass-panel">
                 <div className="quest-top-bar">
                   <span className="quest-rank-pill">{proj.category || 'Web App'}</span>

@@ -4,9 +4,6 @@ import {
   Droplets,
   Zap,
   Moon,
-  Volume2,
-  VolumeX,
-  Lock,
   Layers,
   User,
   Home,
@@ -15,15 +12,12 @@ import {
   Menu,
   X
 } from 'lucide-react'
-import { soundEngine } from '../audio'
 
 export default function Navbar({
   activePage,
   setActivePage,
   breathing,
   setBreathing,
-  isMuted,
-  setIsMuted,
   onSlash,
   avatar
 }) {
@@ -61,11 +55,6 @@ export default function Navbar({
     soundEngine.playClick()
     setMobileMenuOpen(false)
     window.scrollTo({ top: 0, behavior: 'smooth' })
-  }
-
-  const handleAudioToggle = () => {
-    const muted = soundEngine.toggleMute()
-    setIsMuted(muted)
   }
 
   return (
@@ -129,20 +118,10 @@ export default function Navbar({
             ))}
           </div>
 
-          {/* Sound Mute Toggle */}
-          <button
-            onClick={handleAudioToggle}
-            className={`sound-toggle-btn ${isMuted ? 'muted' : ''}`}
-            title={isMuted ? 'Включить интерактивные звуки' : 'Выключить звук'}
-            aria-label={isMuted ? 'Включить звук' : 'Выключить звук'}
-          >
-            {isMuted ? <VolumeX size={17} /> : <Volume2 size={17} />}
-          </button>
-
           {/* PC-only Admin Quick Button (round button with User icon) */}
           <button
             onClick={() => handleNavClick('admin')}
-            className={`sound-toggle-btn admin-round-btn ${activePage === 'admin' ? 'active' : ''}`}
+            className={`admin-round-btn ${activePage === 'admin' ? 'active' : ''}`}
             title="Панель администратора"
             aria-label="Панель администратора"
           >
