@@ -3,7 +3,6 @@ import {
   Search,
   ExternalLink,
   Sparkles,
-  Plus,
   Layers,
   Code,
   Bot,
@@ -127,15 +126,6 @@ export default function ProjectsPage({ projects, setActivePage }) {
             )
           })}
         </div>
-
-        <button
-          onClick={() => setActivePage('admin')}
-          className="add-new-quest-shortcut-btn"
-          title="Добавить новый проект через панель управления"
-        >
-          <Plus size={16} />
-          <span>Добавить проект</span>
-        </button>
       </div>
 
       {/* Projects Grid */}

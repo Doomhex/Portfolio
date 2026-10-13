@@ -337,9 +337,6 @@
   .admin-round-btn {
     display: none !important;
   }
-  .add-new-quest-shortcut-btn {
-    display: none !important;
-  }
   .mobile-menu-trigger {
     display: flex;
     align-items: center;
@@ -1098,26 +1095,6 @@
 .filter-btn.active .filter-count-badge {
   background: var(--neon-primary);
   color: #000;
-}
-
-.add-new-quest-shortcut-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 16px;
-  border-radius: var(--radius-md);
-  background: var(--neon-primary);
-  color: #000;
-  font-weight: 700;
-  font-size: 0.85rem;
-  border: none;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.add-new-quest-shortcut-btn:hover {
-  filter: brightness(1.15);
-  box-shadow: 0 0 15px var(--neon-glow);
 }
 
 /* ================= Breathing Dojo Page ================= */
@@ -1917,9 +1894,6 @@
   .filter-btn {
     white-space: nowrap;
     flex-shrink: 0;
-  }
-  .add-new-quest-shortcut-btn {
-    display: none !important;
   }
 
   /* About Page */
