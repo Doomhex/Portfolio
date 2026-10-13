@@ -1,4 +1,5 @@
 import React from 'react'
+import confetti from 'canvas-confetti'
 import {
   Flame,
   Droplets,
@@ -40,19 +41,37 @@ export default function Navbar({
 
   const handleBreathingChange = (styleId) => {
     setBreathing(styleId)
-    if (styleId === 'water') soundEngine.playWater()
-    else if (styleId === 'thunder') soundEngine.playThunder()
-    else if (styleId === 'sun') soundEngine.playFire()
-    else soundEngine.playSlash()
 
+    // Fullscreen blade slash animation + callout
     if (onSlash) {
-      onSlash(`Тема: ${styleId.toUpperCase()}`)
+      const themeLabels = {
+        sun: 'ДЫХАНИЕ СОЛНЦА (HINOKAMI KAGURA)',
+        water: 'ДЫХАНИЕ ВОДЫ (WATER BREATHING)',
+        thunder: 'ДЫХАНИЕ ГРОМА (THUNDER BREATHING)',
+        moon: 'ДЫХАНИЕ ЛУНЫ (MOON BREATHING)'
+      }
+      onSlash(themeLabels[styleId] || `ТЕМА: ${styleId.toUpperCase()}`)
     }
+
+    // Elemental theme confetti sparks
+    const themeColors = {
+      sun: ['#ef4444', '#f97316', '#facc15', '#ffffff'],
+      water: ['#38bdf8', '#0284c7', '#67e8f9', '#ffffff'],
+      thunder: ['#facc15', '#eab308', '#fef08a', '#ffffff'],
+      moon: ['#c084fc', '#a855f7', '#e9d5ff', '#ffffff']
+    }
+    try {
+      confetti({
+        particleCount: 50,
+        spread: 70,
+        origin: { y: 0.15 },
+        colors: themeColors[styleId] || ['#ef4444', '#38bdf8', '#facc15', '#c084fc']
+      })
+    } catch (e) {}
   }
 
   const handleNavClick = (pageId) => {
     setActivePage(pageId)
-    soundEngine.playClick()
     setMobileMenuOpen(false)
     window.scrollTo({ top: 0, behavior: 'smooth' })
   }

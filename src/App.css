@@ -337,6 +337,9 @@
   .admin-round-btn {
     display: none !important;
   }
+  .add-new-quest-shortcut-btn {
+    display: none !important;
+  }
   .mobile-menu-trigger {
     display: flex;
     align-items: center;
@@ -1916,8 +1919,7 @@
     flex-shrink: 0;
   }
   .add-new-quest-shortcut-btn {
-    width: 100%;
-    justify-content: center;
+    display: none !important;
   }
 
   /* About Page */

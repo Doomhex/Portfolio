@@ -10,7 +10,6 @@ import ContactPage from './pages/ContactPage'
 import AdminPage from './pages/AdminPage'
 import { INITIAL_PROJECTS } from './data/defaultProjects'
 import { DEFAULT_SITE_CONTENT } from './data/defaultContent'
-import { soundEngine } from './audio'
 import './App.css'
 
 export default function App() {
@@ -162,16 +161,6 @@ export default function App() {
               <span className="pulse-dot green" />
               <span>Vercel CI/CD Active</span>
             </div>
-            <button
-              onClick={() => {
-                setActivePage('admin')
-                soundEngine.playClick()
-              }}
-              className="btn-reset-ghost"
-              title="Открыть панель администратора"
-            >
-              Панель управления
-            </button>
           </div>
         </div>
       </footer>
